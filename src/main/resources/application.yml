@@ -16,8 +16,8 @@ spring:
         dialect: org.hibernate.dialect.PostgreSQLDialect
 # JWT Configuration
 jwt:
-  secret: "dGVzdFNlY3JldEtleUZvclRlc3RpbmdQdXJwb3Nlc09ubHk="
-  expiration: 18000  # 5 hours in seconds
+  secret:
+  expiration: 7200  # 2 hours in seconds
 # Security Configuration
 security:
   user:

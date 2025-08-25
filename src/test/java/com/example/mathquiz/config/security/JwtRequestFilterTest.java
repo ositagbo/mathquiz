@@ -24,7 +24,6 @@ import java.util.Collections;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -84,14 +83,11 @@ class JwtRequestFilterTest {
     void shouldThrowExceptionForExpiredToken() throws Exception {
         when(request.getRequestURI()).thenReturn("/api/resource");
         when(request.getHeader("Authorization")).thenReturn("Bearer expiredToken");
-        when(jwtTokenUtil.getUsernameFromToken("expiredToken"))
-                .thenThrow(new BadCredentialsException("Expired token"));
+        when(jwtTokenUtil.getUsernameFromToken("expiredToken")).thenThrow(new BadCredentialsException("Expired token"));
 
-        assertThatThrownBy(() ->
-                jwtRequestFilter.doFilterInternal(request, response, filterChain))
-                .isInstanceOf(BadCredentialsException.class)
-                .hasMessageContaining("JWT Token has expired or is invalid");
+        jwtRequestFilter.doFilterInternal(request, response, filterChain);
 
+        verify(response).setStatus(HttpServletResponse.SC_UNAUTHORIZED);
         verify(filterChain, never()).doFilter(request, response);
     }
 

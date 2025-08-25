@@ -3,7 +3,6 @@ package com.example.mathquiz.config.security;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -38,9 +37,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
             chain.doFilter(request, response);
             return;
         }
-        log.info("Processing request to: {}", request.getRequestURI());
         final String requestTokenHeader = request.getHeader("Authorization");
-
         String username = null;
         String jwtToken = null;
 
@@ -51,7 +48,8 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                 username = jwtTokenUtil.getUsernameFromToken(jwtToken);
             } catch (Exception _) {
                 logger.warn("JWT Token has expired or is invalid");
-                throw new BadCredentialsException("JWT Token has expired or is invalid");
+                response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                return;
             }
         }
 
