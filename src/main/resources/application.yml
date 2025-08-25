@@ -4,9 +4,9 @@ spring:
   application:
     name: math-quiz
   datasource:
-    password: Welcome1
     url: jdbc:postgresql://localhost:5432/math_questions
     username: postgres
+    password:
   jpa:
     open-in-view: false
     hibernate:
@@ -16,7 +16,7 @@ spring:
         dialect: org.hibernate.dialect.PostgreSQLDialect
 # JWT Configuration
 jwt:
-  secret: "dGVzdFNlY3JldEtleUZvclRlc3RpbmdQdXJwb3Nlc09ubHk=" #"mySuperSecretKeyThatIsAtLeast32CharactersLong123!"
+  secret: "dGVzdFNlY3JldEtleUZvclRlc3RpbmdQdXJwb3Nlc09ubHk="
   expiration: 18000  # 5 hours in seconds
 # Security Configuration
 security:
