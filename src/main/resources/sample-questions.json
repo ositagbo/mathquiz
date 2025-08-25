@@ -1,0 +1,17 @@
+[
+  {
+    "content": "What is 2 + 2?",
+    "options": ["3", "4", "5", "6"],
+    "correctOption": 1
+  },
+  {
+    "content": "What is 5 - 3?",
+    "options": ["1", "2", "3", "4"],
+    "correctOption": 1
+  },
+  {
+    "content": "How much is 3 + 1?",
+    "options": ["2", "3", "4", "5"],
+    "correctOption": 2
+  }
+]
