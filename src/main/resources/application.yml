@@ -1,0 +1,78 @@
+server:
+  port: 9091
+spring:
+  application:
+    name: math-quiz
+  datasource:
+    url: jdbc:postgresql://localhost:5432/math_questions
+    username: postgres
+    password:
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+# JWT Configuration
+jwt:
+  secret: fakekeyfortestingpurposesonlyondevelopmentenv=+
+  expiration-ms: 7200  # 2 hours in seconds
+# Security Configuration
+security:
+  user:
+    name: admin
+    password: password
+    roles: ADMIN
+# Actuator Configuration
+management:
+  endpoints:
+    jmx:
+      exposure:
+        include: health,info
+    web:
+      exposure:
+        include: health,info,metrics,env,beans
+      base-path: /manage
+      path-mapping:
+        health: health-check
+  endpoint:
+    health:
+      show-details: always
+      show-components: always
+      group:
+        custom:
+          include: diskSpace,db
+    metrics:
+      export:
+        prometheus:
+          enabled: true
+      distribution:
+        percentiles-histogram:
+          http.server.requests: true
+  info:
+    env:
+      enabled: true
+    git:
+      mode: full
+# Application Info
+info:
+  application:
+    name: Grade 1 Math Questions API
+    description: REST API for generating Grade 1 mathematics questions
+    version: 1.0.0
+    encoding: UTF-8
+    java:
+      version: @java.version@
+
+# Logging Configuration (Optional)
+logging:
+  level:
+    com.example.mathquiz: INFO
+    org.springframework.web: WARN
+    org.hibernate: ERROR
+  file:
+    name: logs/mathquiz.log
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
