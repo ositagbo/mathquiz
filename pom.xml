@@ -17,7 +17,8 @@
         <java.version>24</java.version>
         <spring-beans.version>6.2.10</spring-beans.version>
         <spring-webmvc.version>6.2.10</spring-webmvc.version>
-        <commons-lang3.version>3.18.0</commons-lang3.version>
+        <commons-lang3.version>3.19.0</commons-lang3.version>
+        <commons-collections4.version>4.5.0</commons-collections4.version>
         <mapstruct.version>1.6.3</mapstruct.version>
         <lombok.version>1.18.38</lombok.version>
         <jjwt-api.version>0.12.7</jjwt-api.version>
@@ -26,6 +27,7 @@
         <mockwebserver.version>5.1.0</mockwebserver.version>
         <maven-surefire-plugin.version>3.5.3</maven-surefire-plugin.version>
         <maven-compiler-plugin.version>3.14.0</maven-compiler-plugin.version>
+        <prettier-maven-plugin.version>0.22</prettier-maven-plugin.version>
     </properties>
     <dependencies>
         <dependency>
@@ -83,6 +85,11 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
             <version>${commons-lang3.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-collections4</artifactId>
+            <version>${commons-collections4.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.httpcomponents.client5</groupId>
@@ -211,7 +218,7 @@
             <plugin>
                 <groupId>com.hubspot.maven.plugins</groupId>
                 <artifactId>prettier-maven-plugin</artifactId>
-                <version>0.22</version>
+                <version>${prettier-maven-plugin.version}</version>
                 <configuration>
                     <prettierJavaVersion>2.7.5</prettierJavaVersion>
                     <printWidth>120</printWidth>
